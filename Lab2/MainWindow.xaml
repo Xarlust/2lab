@@ -1,0 +1,48 @@
+﻿<Window x:Class="Lab2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="460" Width="580">
+    
+    <StackPanel Margin="5">
+        <DockPanel>
+            <TextBlock Text="Directory:"/>
+            <TextBox  DataContext="{Binding AppModel}" Text="{Binding Folder}" Margin="4,0,0,0" Width="470"/>
+            <Button  Command="{Binding SelectFolder}" Width="20"  Content="..." HorizontalAlignment="Right" />
+        </DockPanel>
+
+        <DockPanel Margin="0,2,0,2">
+            <CheckBox IsChecked="{Binding AppModel.SubDirectories}" Margin="54,0,0,0"/>
+            <TextBlock Text="Include sub-directories" Margin="3,0,0,0" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="File Mask:" />
+            <TextBox DataContext="{Binding AppModel}" Text="{Binding Mask}" Width="200" Margin="3,0,0,0"/>
+            <TextBlock Text="Exclude Mask:" Margin="15,0,0,0" />
+            <TextBox DataContext="{Binding AppModel}" Text="{Binding ExcludeMask, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="3,0,0,0"/>
+        </DockPanel>
+
+        <TextBlock Text="Find" />
+        <TextBox  DataContext="{Binding AppModel}" Text="{Binding Find, UpdateSourceTrigger=PropertyChanged}" Width="550" Height="70" />
+        <Button Content="Find" Command="{Binding Find}" Width="70" HorizontalAlignment="Right" Margin="0,5,2,0"/>
+
+        <TextBlock Text="Replace" />
+        <TextBox  DataContext="{Binding AppModel}" Text="{Binding Replace, UpdateSourceTrigger=PropertyChanged}" Width="550" Height="70"/>
+        <Button Content="Replace" Command="{Binding Replace}" Width="70" HorizontalAlignment="Right" Margin="0,5,2,0"/>
+
+        <TextBlock Text="Files:"/>
+        <ListBox  ItemsSource="{Binding GoodFiles}" Width="550" Height="70" />
+
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=ProgBar.CurrentTask}" />
+            <ProgressBar Panel.ZIndex="2"  Value="{Binding ProgBar.Progress}" Height="20" Width="475" />
+            <Button  Content="Cancel" Command="{Binding CancelOperation}" Width="70" Margin="5,0,0,0" />
+        </DockPanel>
+    </StackPanel>
+</Window>
+
+
